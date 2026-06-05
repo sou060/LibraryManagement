@@ -1,18 +1,17 @@
 package com.java.librarymanagement.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class Authors {
@@ -28,5 +27,6 @@ public class Authors {
     private String authorEmail;
     @ManyToMany(mappedBy = "authors",cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     @ToString.Exclude
+    @JsonIgnore
     private Set<Book> book=new HashSet<>();
 }
